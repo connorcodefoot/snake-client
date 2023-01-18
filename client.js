@@ -3,7 +3,7 @@ const net = require("net");
 
 const connect = function () {
   const conn = net.createConnection({
-    host: '10.0.2.15',
+    host: '165.227.47.243',
     port: 50541,
   });
 
@@ -12,14 +12,12 @@ const connect = function () {
 
   conn.on("connect", () => {
     conn.write("Name: DOG");
-  })  
-
+  })
+  
   // Receive data when connected
   conn.on("data", (data) => {
     console.log("Server says: ", data);
   });
-
-  
 
   return conn;
 };
