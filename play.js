@@ -1,26 +1,30 @@
-const net = require("net");
-
-// establishes a connection with the game server
-const connect = function () {
-  const conn = net.createConnection({
-    host: '10.0.2.15',
-    port: 50541,
-  });
-
-  // interpret incoming data as text
-  conn.setEncoding("utf8");
-
-  conn.on("data", (data) => {
-    console.log("Server says: ", data);
-  });
-
-  return conn;
-};
+const connect = require("./client")
 
 console.log("Connecting ...");
 
 connect();
 
+const setupInput = function () {
+  const stdin = process.stdin;
+  stdin.setRawMode(true);
+  stdin.setEncoding("utf8");
+  stdin.resume();
+  const handleUserInput = function (key) {
+    // ctrl-c ( end of text )
+    if ( key === '\u0003' ) {
+    process.exit();
+    };
+  }
+  stdin.on("data", handleUserInput);
+  return stdin;
+};
+
+setupInput()
+
+
+
+  
+  
 
 
 
